@@ -2,59 +2,92 @@ import React from 'react';
 import './Feedback.css';
 
 class Feedback extends React.Component {
-    // static defaultProps = {
-    //     initialGood: 0,
-    //     initialNeutral: 0,
-    //     initialBad: 0
-    // }
+  // static defaultProps = {
+  //     initialGood: 0,
+  //     initialNeutral: 0,
+  //     initialBad: 0
+  // }
 
-    state = {
-        good: 0,
-        neutral: 0,
-        bad: 0,
-    }
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+  
+  hendleDecrementGood = () => {
+    this.setState(prevState => ({
+      good: prevState.good + 1,
+    }));
+  };
+  hendleDecrementNeutral = () => {
+    this.setState(prevState => ({
+      neutral: prevState.neutral + 1,
+    }));
+  };
+  hendleDecrementBad = () => {
+    this.setState(prevState => ({
+      bad: prevState.bad + 1,
+    }));
+  };
 
-    hendleDecrementGood = () => {
-        this.setState(prevState => ({
-            good: prevState.good + 1,
-        }));
-    }
-    hendleDecrementNeutral = () => {
-        this.setState(prevState => ({
-            neutral: prevState.neutral + 1,
-        }));
-    }
-    hendleDecrementBad = () => {
-        this.setState(prevState => ({
-            bad: prevState.bad + 1,
-        }));
-    }
-    render() {
-        return (
-            <div className="section">
-                <div className="feedbackMenu">
-                    <h2 className="feedbackTitle">
-                        Please Leave Feedback
-                    </h2>
-                    <div className="feedbackBtn">
-                        <button type="button" onClick={this.hendleDecrementGood}>Good</button>
-                        <button type="button" onClick={this.hendleDecrementNeutral}>Neutral</button>
-                        <button type="button" onClick={this.hendleDecrementBad}>Bad</button>
-                    </div>
-                </div>
-                <div className="statisticsMenu">
-                    <h2 className="statisticsTitle">
-                        Statistics
-                    </h2>
-                    <ul className="statisticsItem">
-                        <li className="statisticsList">Good: <span className="statisticsLink">{this.state.good}</span></li>
-                        <li className="statisticsList">Neutral: <span className="statisticsLink">{this.state.neutral}</span></li>
-                        <li className="statisticsList">Bad: <span className="statisticsLink">{this.state.bad}</span></li>
-                    </ul>
-                </div>
-            </div>
-        );
-    }
+ 
+  countTotalFeedback() {
+    const {good, neutral, bad} = this.state;
+    const totalFeedback = good + neutral + bad;
+    return (totalFeedback);
+  };
+
+  countPositiveFeedbackPercentage() {
+    const {good, neutral, bad} = this.state;
+    const totalFeedback = good + neutral + bad;
+    return Math.round(good / totalFeedback * 100);
+  };
+
+
+  render() {
+    return (
+      <div className="section">
+        <div className="feedbackMenu">
+          <h2 className="feedbackTitle">Please Leave Feedback</h2>
+          <div className="feedbackBtn">
+            <button type="button" onClick={this.hendleDecrementGood}>
+              Good
+            </button>
+            <button type="button" onClick={this.hendleDecrementNeutral}>
+              Neutral
+            </button>
+            <button type="button" onClick={this.hendleDecrementBad}>
+              Bad
+            </button>
+          </div>
+        </div>
+        <div className="statisticsMenu">
+          <h2 className="statisticsTitle">Statistics</h2>
+          <ul className="statisticsItem">
+            <li className="statisticsList">
+              Good: 
+              <span className="statisticsLink">{this.state.good}</span>
+            </li>
+            <li className="statisticsList">
+              Neutral:
+              <span className="statisticsLink">{this.state.neutral}</span>
+            </li>
+            <li className="statisticsList">
+              Bad: <span className="statisticsLink">{this.state.bad}</span>
+            </li>
+            <li className="statisticsList">
+              Total:
+              <span className="statisticsLink">{this.countTotalFeedback()}</span>
+            </li>
+            <li className="statisticsList">
+              Positive Feedback:
+              <span className="statisticsLink">{this.countPositiveFeedbackPercentage() || 0}%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Feedback;

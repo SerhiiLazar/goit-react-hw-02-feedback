@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import css from './FeedbackOptions.module.css';
 
 
 const FeedbackOptions = ({options, onFeadback}) => {
@@ -7,12 +9,12 @@ const FeedbackOptions = ({options, onFeadback}) => {
   };
 
   return (
-    <ul>
+    <ul className={css.feadbackItem}>
     {Object.keys(options).map(feedbackType => {
       return (
-        <li 
+        <li className={css.feadbackList}
         key={feedbackType}>
-        <button
+        <button type='button' className={css.feadbackbtn}
         onClick={onClickButton(feedbackType)}
         >
         {feedbackType}
@@ -23,5 +25,11 @@ const FeedbackOptions = ({options, onFeadback}) => {
     </ul>
   )
 }
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.objectOf(PropTypes.number).isRequired,
+  onFeadback: PropTypes.func.isRequired,
+};
+
 
 export default FeedbackOptions;

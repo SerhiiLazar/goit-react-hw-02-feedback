@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from './App.module.css';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 import Section from './Section';
@@ -37,8 +38,8 @@ class App extends Component {
 
     
     return (
-      <div>
-        <Section title="Please leave Feedback">
+      <div className={css.wrapper}>
+        <Section title="Please leave Feedback" className={css.section}>
           <FeedbackOptions 
             options={options} 
             onFeadback={onFeadback} />

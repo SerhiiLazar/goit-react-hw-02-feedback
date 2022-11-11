@@ -35,6 +35,6 @@ Statistics.propTypes = {
   bad: PropTypes.number.isRequired,
   totalFeedback: PropTypes.func.isRequired,
   positivePersent: PropTypes.func.isRequired,
-}
+};
 
 export default Statistics;

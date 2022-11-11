@@ -25,7 +25,8 @@ class App extends Component {
 
   onFeadback = feedbackType => {
     this.setState(prev => ({
-      [feedbackType]: prev[feedbackType] + 1}));
+      [feedbackType]: prev[feedbackType] + 1,
+    }));
   };
 
   render() {
@@ -36,25 +37,24 @@ class App extends Component {
     const total = this.countTotalFeedback();
     const positiv = this.countTotalFeedback();
 
-    
     return (
       <div className={css.wrapper}>
         <Section title="Please leave Feedback" className={css.section}>
-          <FeedbackOptions 
-            options={options} 
-            onFeadback={onFeadback} />
+          <FeedbackOptions options={options} onFeadback={onFeadback} />
         </Section>
 
         <Section title="Statistics">
-          {!totalFeedback 
-           ? <Notification messege='There is no feedback'/>
-           : <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            totalFeedback={total}
-            positivePersent={positiv}
-          />}
+          {!totalFeedback ? (
+            <Notification messege="There is no feedback" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              totalFeedback={total}
+              positivePersent={positiv}
+            />
+          )}
         </Section>
       </div>
     );
